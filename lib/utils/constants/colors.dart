@@ -21,7 +21,8 @@ import 'package:flutter/material.dart';
 
    static const Color light = Color(0xFFFFFFFF);
    static const Color dark = Color(0xFF272727);
-   static const Color primaryBackground = Color(0xFFF3F5FF);
+   static const Color secondaryBackground = Color(0xFFF3F5FF);
+   static const Color primaryBackground = Color(0xFF76B4E4);
 
    static const Color lightContainer = Color(0xFFFFFFFF);
    static const Color darkContainer = Color(0xFF000000);
@@ -31,7 +32,7 @@ import 'package:flutter/material.dart';
    static const Color buttonDisabled = Color(0xFFC4C4C4);
 
    static const Color borderPrimary = Color(0xFFFFFFFF);
-   static const Color borderSecondary = Color(0xFFFFFFFF);
+   static  Color borderSecondary = Colors.white.withValues(alpha: 0.1);
 
    static const Color error = Color(0xFFC22424);
    static const Color success = Color(0xff12c86b);

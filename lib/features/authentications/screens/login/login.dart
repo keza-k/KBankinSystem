@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:kbankinsystem/common/styles/spacing_styles.dart';
+import 'package:kbankinsystem/features/authentications/screens/landingpage/landingpage.dart';
+import 'package:kbankinsystem/features/authentications/screens/signup/signup.dart';
 import 'package:kbankinsystem/utils/helpers/helper_functions.dart';
 import 'package:kbankinsystem/utils/themes/custom_themes/texts.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  _LoginFormState createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginScreen>{
+  bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +36,7 @@ class LoginScreen extends StatelessWidget {
                 KTexts.loginSubTitle, 
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
 
               /// Form
               Form(
@@ -45,14 +54,25 @@ class LoginScreen extends StatelessWidget {
 
                     /// Password
                     TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: "Password",
-                        prefixIcon: Icon(Icons.lock_outline),
-                        suffixIcon: Icon(Icons.visibility_off),
-                      ),
-                      obscureText: true,
+                    decoration: InputDecoration(
+                      
+                      labelText: "Pin",
+                      prefixIcon: Icon(Icons.lock_outline),
+                      suffixIcon: IconButton( 
+                      icon: 
+                      Icon(obscureText? Icons.visibility_off: Icons.visibility,),
+                      onPressed: (){
+                        setState(() {
+                          obscureText = !obscureText;
+                        });
+                      },
                     ),
-                    const SizedBox(height: 10),
+                    
+                    ),
+                    obscureText: obscureText,
+                    keyboardType: TextInputType.number,
+                  ),
+                  SizedBox(height: 40),
 
                     /// Forgot password
                     Align(
@@ -71,7 +91,9 @@ class LoginScreen extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          // TODO: Add login logic
+                           Navigator.push(context, 
+                            MaterialPageRoute(builder: (context)=> Landingpage())
+                            );
                         },
                         child: const Text("Login"),
                       ),
@@ -98,7 +120,9 @@ class LoginScreen extends StatelessWidget {
                         const Text("Don’t have an account?"),
                         TextButton(
                           onPressed: () {
-                            // TODO: Navigate to Register screen
+                            Navigator.push(context, 
+                            MaterialPageRoute(builder: (context)=> SignupScreen())
+                            );
                           },
                           child: const Text("Sign up"),
                         )

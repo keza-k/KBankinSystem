@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "KBankinSystem (Flutter SM A245F)",
+            "type": "dart",
+            "request": "launch"
+        },
+
+        {
+            "name": "KBankinSystem",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "KBankinSystem (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "KBankinSystem (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

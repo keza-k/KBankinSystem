@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kbankinsystem/features/authentications/screens/login/login.dart';
+import 'package:kbankinsystem/features/authentications/screens/signup/signup.dart';
 import 'package:kbankinsystem/utils/themes/theme.dart';
 
 class App extends StatelessWidget {
@@ -13,7 +13,8 @@ class App extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: KBankingTheme.lightTheme ,
       darkTheme: KBankingTheme.darkTheme,
-      home: LoginScreen(),
+      home: SignupScreen(),
+      
 
     );
   }
