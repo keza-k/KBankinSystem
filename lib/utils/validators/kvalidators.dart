@@ -36,4 +36,48 @@ static String? validateAmount(String? value) {
     return null;
   }
 
+    static String? validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Email is required.';
+    }
+    
+    final RegExp regex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
+
+    if (!regex.hasMatch(value)) {
+      return "Please enter a valid email address.";
+    }
+    return null;
+  }
+
+  static String? validatePin(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Pin is required.';
+    }
+    if (value.length < 6 || value.length > 6  ) {
+      return "Pin must be at least 6 characters long.";
+    }
+    return null;
+  }
+
+  static String? validateNames(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Atleast one name is required';
+    }else if (value.length < 2) {
+      return 'Name must be at least 2 characters';
+    } else if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(value)) {
+      return 'Name can only contain letters and spaces';
+    }
+    return null;
+}
+
+
+  static String? validateOTP(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'OTP is required.';
+    }
+    // if (value.length < 6 || value.length > 6  ) {
+    //   return "O must be at least 6 characters long.";
+    // }
+    return null;
+  }
 }

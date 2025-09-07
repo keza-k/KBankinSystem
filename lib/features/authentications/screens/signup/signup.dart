@@ -4,6 +4,7 @@ import 'package:kbankinsystem/features/authentications/screens/Verify_Emails/ver
 import 'package:kbankinsystem/features/authentications/screens/login/login.dart';
 import 'package:kbankinsystem/utils/helpers/helper_functions.dart';
 import 'package:kbankinsystem/utils/themes/custom_themes/texts.dart';
+import 'package:kbankinsystem/utils/validators/kvalidators.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -14,6 +15,13 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupFormState extends State<SignupScreen>{
   bool obscureText = true;
+  bool obscureTextcon = true;
+  var emailController = TextEditingController(); 
+  var namesController = TextEditingController();
+  var pinController = TextEditingController(); 
+  var confpinController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
 
    @override
   Widget build(BuildContext context) {
@@ -41,9 +49,12 @@ class _SignupFormState extends State<SignupScreen>{
               const SizedBox(height: 20),
 
               Form(
+                key: _formKey,
                 child: Column(
                   children: [
                     TextFormField(
+                      validator: (value) => KValidator.validateNames(value),
+                      controller: namesController,
                       decoration: InputDecoration(
                         labelText: "Full Names",
                       ),
@@ -52,6 +63,8 @@ class _SignupFormState extends State<SignupScreen>{
                     const SizedBox(height: 20),
 
                     TextFormField(
+                      validator: (value) => KValidator.validateEmail(value),
+                      controller: emailController,
                       decoration: InputDecoration(
                         labelText: 'Email'
                       ),
@@ -60,26 +73,50 @@ class _SignupFormState extends State<SignupScreen>{
                     const SizedBox(height: 20),
 
                     TextFormField(
+                      validator: (value) => KValidator.validatePin(value),
+                      controller: pinController,
                       decoration: InputDecoration(
                         labelText: "Pin",
-                        suffixIcon: Icon(Icons.visibility_off),
+                        suffixIcon: IconButton( 
+                      icon: 
+                      Icon(obscureText? Icons.visibility_off: Icons.visibility,),
+                      onPressed: (){
+                        setState(() {
+                          obscureText = !obscureText;
+                        });
+                      },
                       ),
-                      obscureText: true,
+                      ),
+                      obscureText: obscureText,
                     ),
                     const SizedBox(height: 30),
 
-                    // TextFormField(
-                    //   decoration: InputDecoration(
-                    //     labelText: "Confirm Pin ",
-                    //     suffixIcon: Icon(Icons.visibility_off),
-                    //   ),
-                    //    obscureText: true,
-                    // ),
+                    TextFormField(
+                      validator: (value) => KValidator.validatePin(value),
+                      controller: confpinController,
+                      decoration: InputDecoration(
+                        labelText: "Confirm Pin",
+                        suffixIcon: IconButton( 
+                      icon: 
+                      Icon(obscureTextcon? Icons.visibility_off: Icons.visibility,),
+                      onPressed: (){
+                        setState(() {
+                          obscureTextcon = !obscureTextcon;
+                        });
+                      },
+                      ),
+                      ),
+                      obscureText: obscureTextcon,
+                    ),
+                    const SizedBox(height: 30),
 
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
+                           if (!_formKey.currentState!.validate()) {
+                                return;
+                                }
                          Navigator.push(context, 
                             MaterialPageRoute(builder: (context)=> VerifyEmailscreen())
                             );

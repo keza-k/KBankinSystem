@@ -4,6 +4,7 @@ import 'package:kbankinsystem/common/widgets/custom_shapes/containers/primary_he
 import 'package:kbankinsystem/features/authentications/screens/landingpage/popUpScreen.dart';
 import 'package:kbankinsystem/utils/helpers/helper_functions.dart';
 import 'package:kbankinsystem/utils/themes/custom_themes/texts.dart';
+import 'package:kbankinsystem/utils/validators/kvalidators.dart';
 
 class TransferForm extends StatefulWidget {
   const TransferForm({super.key});
@@ -12,6 +13,10 @@ class TransferForm extends StatefulWidget {
   _TransferFormState createState() => _TransferFormState();
 }
 class _TransferFormState extends State<TransferForm>{
+  final _formKey = GlobalKey<FormState>();
+  var senderaccountController = TextEditingController(); 
+  var receiveraccountController = TextEditingController(); 
+  var amountController = TextEditingController();
   bool obscureText = true;
 
   @override
@@ -48,11 +53,14 @@ class _TransferFormState extends State<TransferForm>{
             ),
              
               Form(
+                key: _formKey,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child:Column(
                   children: [
                     TextFormField(
+                      validator: (value) => KValidator.validateAccountNumber(value),
+                      controller: senderaccountController,
                       decoration: InputDecoration(
                         labelText:KTexts.senderaccountnumber ,
                       ),
@@ -63,6 +71,8 @@ class _TransferFormState extends State<TransferForm>{
                       width: 50,),
 
                     TextFormField(
+                       validator: (value) => KValidator.validateAccountNumber(value),
+                      controller: receiveraccountController,
                       decoration: InputDecoration(
                         labelText: KTexts.receiveraccountnumber,
                       ),
@@ -76,6 +86,8 @@ class _TransferFormState extends State<TransferForm>{
 
 
                     TextFormField(
+                       validator: (value) => KValidator.validateAmount(value),
+                      controller: amountController,
                       decoration: InputDecoration(
                         labelText: KTexts.Tamount,
                       ),
@@ -96,6 +108,9 @@ class _TransferFormState extends State<TransferForm>{
                         width: 70,
                         child: ElevatedButton(
                       onPressed: () async {
+                           if (!_formKey.currentState!.validate()) {
+                            return;
+                           }
                           final number = await showDialog<int>(
                           context: context,
                           builder: (context) =>  NumberInputDialog(

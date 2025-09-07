@@ -30,6 +30,6 @@ class KCircularContainer extends StatelessWidget {
         color: backgroundColor,
      ),
      child: child,
-                         );
+    );
   }
 }

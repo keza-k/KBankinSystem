@@ -4,6 +4,7 @@ import 'package:kbankinsystem/features/authentications/screens/landingpage/landi
 import 'package:kbankinsystem/features/authentications/screens/signup/signup.dart';
 import 'package:kbankinsystem/utils/helpers/helper_functions.dart';
 import 'package:kbankinsystem/utils/themes/custom_themes/texts.dart';
+import 'package:kbankinsystem/utils/validators/kvalidators.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,6 +15,11 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginFormState extends State<LoginScreen>{
   bool obscureText = true;
+  final _formKey = GlobalKey<FormState>();
+  var pinController = TextEditingController();
+  var emailController = TextEditingController(); 
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +46,13 @@ class _LoginFormState extends State<LoginScreen>{
 
               /// Form
               Form(
+                 key: _formKey,
                 child: Column(
                   children: [
                     /// Email
                     TextFormField(
+                      validator: (value) => KValidator.validateEmail(value),
+                      controller: emailController,
                       decoration: const InputDecoration(
                         labelText: "Email",
                         prefixIcon: Icon(Icons.email_outlined),
@@ -54,8 +63,9 @@ class _LoginFormState extends State<LoginScreen>{
 
                     /// Password
                     TextFormField(
+                      validator: (value) => KValidator.validateEmail(value),
+                      controller: pinController,
                     decoration: InputDecoration(
-                      
                       labelText: "Pin",
                       prefixIcon: Icon(Icons.lock_outline),
                       suffixIcon: IconButton( 
@@ -67,7 +77,6 @@ class _LoginFormState extends State<LoginScreen>{
                         });
                       },
                     ),
-                    
                     ),
                     obscureText: obscureText,
                     keyboardType: TextInputType.number,
@@ -91,11 +100,14 @@ class _LoginFormState extends State<LoginScreen>{
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
+                          if (!_formKey.currentState!.validate()) {
+                                return;
+                                }
                            Navigator.push(context, 
                             MaterialPageRoute(builder: (context)=> Landingpage())
                             );
                         },
-                        child: const Text("Login"),
+                        child: const Text(KTexts.loginUpbutton),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -117,7 +129,7 @@ class _LoginFormState extends State<LoginScreen>{
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Don’t have an account?"),
+                        const Text("Don't have an account?"),
                         TextButton(
                           onPressed: () {
                             Navigator.push(context, 

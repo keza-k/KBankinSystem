@@ -1,6 +1,7 @@
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:kbankinsystem/features/authentications/screens/landingpage/landingpage.dart';
+import 'package:kbankinsystem/utils/validators/kvalidators.dart';
 
 
 
@@ -31,17 +32,23 @@ class Verifyingotp extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
     TextEditingController otpController = TextEditingController();
+    final _formKey = GlobalKey<FormState>();
+
+    
     return Scaffold(
       appBar: AppBar(title: const Text('Email OTP')),
       body: Padding(
         padding: const EdgeInsets.all(20),
+        key: _formKey,
         child: Column(
         children: [
+          
       TextFormField(
+        validator: (value) => KValidator.validateEmail(value),
         controller: emailController,
         decoration: const InputDecoration(
           labelText: "Enter Email",
-          border: OutlineInputBorder(),
+          // border: OutlineInputBorder(),
         ),
       ),
       SizedBox(height: 16),
@@ -61,15 +68,19 @@ class Verifyingotp extends StatelessWidget {
           ),
           SizedBox(height: 16),
           TextFormField(
-                  controller: otpController,
-                  decoration: const InputDecoration(
-                    labelText: "Enter OTP",
-                    border: OutlineInputBorder(),
-                  ),
-                ), 
-                SizedBox(height: 16),     
+            validator: (value) => KValidator.validateOTP(value),
+            controller: otpController,
+            decoration: const InputDecoration(
+            labelText: "Enter OTP",
+            // border: OutlineInputBorder(),
+            ),
+           ), 
+            SizedBox(height: 16),     
            ElevatedButton(
             onPressed: () async {
+              if (!_formKey.currentState!.validate()) {
+                                return;
+                                }
               bool verified = await EmailOTP.verifyOTP(otp: otpController.text);
               
               if (verified) {
@@ -85,10 +96,10 @@ class Verifyingotp extends StatelessWidget {
                 );
               }
             },
-            child: const Text('Verify OTP'),
+            child: const Text('  Verify OTP  '),
           ),  
           SizedBox(height: 20), 
-
+          
           ],
       ),
       ),

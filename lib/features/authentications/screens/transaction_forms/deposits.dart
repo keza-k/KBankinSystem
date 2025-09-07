@@ -4,6 +4,7 @@ import 'package:kbankinsystem/common/widgets/custom_shapes/containers/primary_he
 import 'package:kbankinsystem/features/authentications/screens/landingpage/popUpScreen.dart';
 import 'package:kbankinsystem/utils/helpers/helper_functions.dart';
 import 'package:kbankinsystem/utils/themes/custom_themes/texts.dart';
+import 'package:kbankinsystem/utils/validators/kvalidators.dart';
 
 class DepositForm extends StatefulWidget {
   const DepositForm({super.key});
@@ -13,6 +14,9 @@ class DepositForm extends StatefulWidget {
 }
 
 class _DepositFormState extends State<DepositForm>{
+  final _formKey = GlobalKey<FormState>();
+  var accountController = TextEditingController(); 
+  var amountController = TextEditingController();
   bool obscureText = true;
 
 @override
@@ -50,11 +54,14 @@ class _DepositFormState extends State<DepositForm>{
             ),
              
               Form(
+                key: _formKey,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child:Column(
                   children: [
                     TextFormField(
+                      validator: (value) => KValidator.validateAccountNumber(value),
+                      controller: accountController,
                       decoration: InputDecoration(
                         labelText: KTexts.accountNumber,
                       ),
@@ -65,6 +72,8 @@ class _DepositFormState extends State<DepositForm>{
                       width: 50,),
 
                     TextFormField(
+                      validator: (value) => KValidator.validateAmount(value),
+                      controller: amountController,
                       decoration: InputDecoration(
                         labelText: KTexts.Damount,
                       ),
@@ -84,6 +93,9 @@ class _DepositFormState extends State<DepositForm>{
                         width: 70,
                         child: ElevatedButton(
                       onPressed: () async {
+                          if (!_formKey.currentState!.validate()) {
+                            return;
+                           }
                           final number = await showDialog<int>(
                           context: context,
                           builder: (context) => const NumberInputDialog(
