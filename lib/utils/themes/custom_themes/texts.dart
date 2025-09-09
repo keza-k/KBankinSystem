@@ -64,7 +64,7 @@ class KTexts{
 
   static const String or = "Or";
 
-  static const String kContinue = "Continue";
+  static const String kContinue = " Continue ";
 
   static const String  resendCode = "Resend Code";
 
@@ -77,6 +77,7 @@ class KTexts{
   static const String transactionType = "Account Number";
   static const String date = "Date";
 
+  static const String popLogin = "Welcome Client, Login successful!!";
 
 
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kbankinsystem/common/styles/spacing_styles.dart';
-import 'package:kbankinsystem/features/authentications/screens/landingpage/landingpage.dart';
+import 'package:kbankinsystem/features/authentications/controllers/controllers.dart';
+import 'package:kbankinsystem/features/authentications/screens/login/popUpLog.dart';
 import 'package:kbankinsystem/features/authentications/screens/signup/signup.dart';
 import 'package:kbankinsystem/utils/helpers/helper_functions.dart';
 import 'package:kbankinsystem/utils/themes/custom_themes/texts.dart';
@@ -18,8 +19,9 @@ class _LoginFormState extends State<LoginScreen>{
   final _formKey = GlobalKey<FormState>();
   var pinController = TextEditingController();
   var emailController = TextEditingController(); 
-
-
+  String email = "";
+  String pin = "";
+  String name = "";
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +60,15 @@ class _LoginFormState extends State<LoginScreen>{
                         prefixIcon: Icon(Icons.email_outlined),
                       ),
                       keyboardType: TextInputType.emailAddress,
+                      onChanged: (value) {
+                        email = value;
+                      },
                     ),
                     const SizedBox(height: 20),
 
-                    /// Password
+                    /// Pin
                     TextFormField(
-                      validator: (value) => KValidator.validateEmail(value),
+                      validator: (value) => KValidator.validatePin(value),
                       controller: pinController,
                     decoration: InputDecoration(
                       labelText: "Pin",
@@ -79,18 +84,21 @@ class _LoginFormState extends State<LoginScreen>{
                     ),
                     ),
                     obscureText: obscureText,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.text,
+                    onChanged: (value){
+                        pin = value;
+                      },
                   ),
                   SizedBox(height: 40),
 
-                    /// Forgot password
+                    /// Forgot pin
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: () {
                           // TODO: Add forgot password navigation
                         },
-                        child: const Text("Forgot Password?"),
+                        child: const Text("Forgot Pin?"),
                       ),
                     ),
                     const SizedBox(height: 30),
@@ -99,13 +107,17 @@ class _LoginFormState extends State<LoginScreen>{
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {    
                           if (!_formKey.currentState!.validate()) {
                                 return;
-                                }
-                           Navigator.push(context, 
-                            MaterialPageRoute(builder: (context)=> Landingpage())
-                            );
+                                }                     
+                          login(email, pin, name, context);
+                          
+                          final screen = await showDialog<int>(
+                                context: context,
+                                builder: (context) => loginPop(
+                                ),
+                              );
                         },
                         child: const Text(KTexts.loginUpbutton),
                       ),

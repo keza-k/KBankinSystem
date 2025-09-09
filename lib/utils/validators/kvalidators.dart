@@ -71,13 +71,15 @@ static String? validateAmount(String? value) {
 }
 
 
-  static String? validateOTP(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'OTP is required.';
-    }
-    // if (value.length < 6 || value.length > 6  ) {
-    //   return "O must be at least 6 characters long.";
-    // }
-    return null;
-  }
+
+
+  // static String? validateOTP(String? value) {
+  //   if (value == null || value.isEmpty) {
+  //     return 'OTP is required.';
+  //   }
+  //   // if (value.length < 6 || value.length > 6  ) {
+  //   //   return "O must be at least 6 characters long.";
+  //   // }
+  //   return null;
+  // }
 }

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:kbankinsystem/utils/themes/custom_themes/texts.dart';
 
 class NumberInputDialog extends StatefulWidget {
-  const NumberInputDialog({super.key, required this.title});
+  const NumberInputDialog({super.key, required this.title, });
 
   final String title;
+  
 
   @override
   State<NumberInputDialog> createState() => _NumberInputDialogState();
@@ -27,6 +28,7 @@ class _NumberInputDialogState extends State<NumberInputDialog> {
     return AlertDialog(
       title: Text(widget.title, style: Theme.of(context).textTheme.bodyLarge,),
       content: TextFormField(
+        
                     decoration: InputDecoration(
                       
                       // labelText: KTexts.pin,
@@ -39,12 +41,15 @@ class _NumberInputDialogState extends State<NumberInputDialog> {
                         });
                       },
                     ),
-                    
+                  
                     ),
+                    
                     obscureText: obscureText,
                     keyboardType: TextInputType.number,
                   ),
+                  
       actions: [
+        
         TextButton(
           child: const Text(KTexts.cancel),
           onPressed: () {
@@ -57,8 +62,11 @@ class _NumberInputDialogState extends State<NumberInputDialog> {
             if (_controller.text.isNotEmpty) {
               Navigator.of(context).pop();
             }
+            
           },
+          
         ),
+        
       ],
     );
   }

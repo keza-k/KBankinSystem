@@ -92,9 +92,13 @@ class _WithdrawFormState extends State<WithdrawForm>{
                                 context: context,
                                 builder: (context) => NumberInputDialog(
                                 title: KTexts.popWithdraw,
+                               
                                 ),
+                                
                               );
+                            
                             },
+                            
                             child: const Text(KTexts.sendButton),
                           ),
                          ),
