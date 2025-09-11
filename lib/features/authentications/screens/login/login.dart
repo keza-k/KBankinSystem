@@ -111,12 +111,11 @@ class _LoginFormState extends State<LoginScreen>{
                           if (!_formKey.currentState!.validate()) {
                                 return;
                                 }                     
-                          login(email, pin, name, context);
+                          login(email, pin, context);
                           
                           final screen = await showDialog<int>(
                                 context: context,
-                                builder: (context) => loginPop(
-                                ),
+                                builder: (context) => loginPop(),
                               );
                         },
                         child: const Text(KTexts.loginUpbutton),

@@ -1,6 +1,7 @@
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:kbankinsystem/features/authentications/screens/landingpage/landingpage.dart';
+import 'package:kbankinsystem/features/authentications/screens/login/login.dart';
 import 'package:kbankinsystem/utils/validators/kvalidators.dart';
 
 class Verifyingotp extends StatelessWidget {
@@ -69,7 +70,7 @@ class Verifyingotp extends StatelessWidget {
               
               if (verified) {
                         Navigator.push(context, 
-                        MaterialPageRoute(builder: (context)=> Landingpage())
+                        MaterialPageRoute(builder: (context)=> LoginScreen())
                             );         
                          ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text("OTP verified successfully!")),

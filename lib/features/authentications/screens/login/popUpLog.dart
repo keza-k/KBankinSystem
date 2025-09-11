@@ -7,7 +7,7 @@ class loginPop extends StatefulWidget {
 
   @override
   State<loginPop> createState() => _loginPopState();
-  
+
 }
 
 class _loginPopState extends State<loginPop> {
@@ -21,13 +21,14 @@ class _loginPopState extends State<loginPop> {
   }
 
 
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text(KTexts.popLogin),
 
       actions: [
-        ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> Landingpage()));}, child: Text(KTexts.kContinue)),
+        ElevatedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> Landingpage(balance: 'Keza', transactions: [],)));}, child: Text(KTexts.kContinue)),
       ],
     );
   }

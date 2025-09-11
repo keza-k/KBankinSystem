@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kbankinsystem/common/widgets/appbar/appbar.dart';
 import 'package:kbankinsystem/common/widgets/custom_shapes/containers/primary_header_container.dart';
+import 'package:kbankinsystem/features/authentications/controllers/controllers.dart';
 import 'package:kbankinsystem/features/authentications/screens/landingpage/popUpScreen.dart';
 import 'package:kbankinsystem/utils/helpers/helper_functions.dart';
 import 'package:kbankinsystem/utils/themes/custom_themes/texts.dart';
@@ -14,10 +15,13 @@ class TransferForm extends StatefulWidget {
 }
 class _TransferFormState extends State<TransferForm>{
   final _formKey = GlobalKey<FormState>();
-  var senderaccountController = TextEditingController(); 
-  var receiveraccountController = TextEditingController(); 
+  var senderAccountController = TextEditingController();
+  var receiverAccountController = TextEditingController();
   var amountController = TextEditingController();
   bool obscureText = true;
+  String senderAccountNumber = "";
+  String receiverAccountNumber = "";
+  String amount = "";
 
   @override
   Widget build(BuildContext context) {
@@ -60,11 +64,14 @@ class _TransferFormState extends State<TransferForm>{
                   children: [
                     TextFormField(
                       validator: (value) => KValidator.validateAccountNumber(value),
-                      controller: senderaccountController,
+                      controller: senderAccountController,
                       decoration: InputDecoration(
                         labelText:KTexts.senderaccountnumber ,
                       ),
                       keyboardType: TextInputType.number,
+                        onChanged: (value){
+                          senderAccountNumber = value;
+                        }
                     ),
                     SizedBox(
                       height: 20,
@@ -72,11 +79,14 @@ class _TransferFormState extends State<TransferForm>{
 
                     TextFormField(
                        validator: (value) => KValidator.validateAccountNumber(value),
-                      controller: receiveraccountController,
+                      controller: receiverAccountController,
                       decoration: InputDecoration(
                         labelText: KTexts.receiveraccountnumber,
                       ),
                       keyboardType: TextInputType.number,
+                        onChanged: (value){
+                          receiverAccountNumber = value;
+                        }
                     ),
                     SizedBox(
                       height: 20,
@@ -92,6 +102,9 @@ class _TransferFormState extends State<TransferForm>{
                         labelText: KTexts.Tamount,
                       ),
                       keyboardType: TextInputType.number,
+                      onChanged: (value){
+                         amount = value;
+                      }
                     ),
                     SizedBox(
                       height: 20,
@@ -113,10 +126,17 @@ class _TransferFormState extends State<TransferForm>{
                            }
                           final number = await showDialog<int>(
                           context: context,
-                          builder: (context) =>  NumberInputDialog(
-                            title: KTexts.popTransfer,
+                          builder: (context) =>  popTrans(
+                            title: KTexts.popTransfer, senderAccountNumber: senderAccountNumber, amount: amount, receiverAccountNumber: receiverAccountNumber,
                           ),
                          );
+
+                           // transfer(senderAccountNumber, receiverAccountNumber, amount, context);
+                           //
+                           // final screen = await showDialog<int>(
+                           //   context: context,
+                           //   builder: (context) => popUpNoti(title: KTexts.transfers,),
+                           // );
 
                       },
                       child: const Text(KTexts.sendButton),

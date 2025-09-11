@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kbankinsystem/common/styles/spacing_styles.dart';
+import 'package:kbankinsystem/features/authentications/controllers/controllers.dart';
 import 'package:kbankinsystem/features/authentications/screens/Verify_Emails/verify_emailScreen.dart';
 import 'package:kbankinsystem/features/authentications/screens/login/login.dart';
 import 'package:kbankinsystem/utils/helpers/helper_functions.dart';
@@ -21,6 +22,10 @@ class _SignupFormState extends State<SignupScreen>{
   var pinController = TextEditingController(); 
   var confpinController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  String email = "";
+  String names = "";
+  String pin = "";
+  String confirmPin = "";
 
 
    @override
@@ -114,12 +119,13 @@ class _SignupFormState extends State<SignupScreen>{
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
+                          signUp(names, email, pin, confirmPin, context);
                            if (!_formKey.currentState!.validate()) {
                                 return;
                                 }
-                         Navigator.push(context, 
-                            MaterialPageRoute(builder: (context)=> VerifyEmailscreen())
-                            );
+                         // Navigator.push(context,
+                         //    MaterialPageRoute(builder: (context)=> VerifyEmailscreen())
+                         //    );
                         },
                       child: Text(KTexts.signUpbutton)),
 

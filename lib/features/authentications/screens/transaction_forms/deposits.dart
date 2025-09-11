@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kbankinsystem/common/widgets/appbar/appbar.dart';
 import 'package:kbankinsystem/common/widgets/custom_shapes/containers/primary_header_container.dart';
+import 'package:kbankinsystem/features/authentications/controllers/controllers.dart';
 import 'package:kbankinsystem/features/authentications/screens/landingpage/popUpScreen.dart';
 import 'package:kbankinsystem/utils/helpers/helper_functions.dart';
 import 'package:kbankinsystem/utils/themes/custom_themes/texts.dart';
@@ -18,6 +19,10 @@ class _DepositFormState extends State<DepositForm>{
   var accountController = TextEditingController(); 
   var amountController = TextEditingController();
   bool obscureText = true;
+  String amount = "";
+  String accountNumber = "";
+
+
 
 @override
 @override
@@ -66,6 +71,9 @@ class _DepositFormState extends State<DepositForm>{
                         labelText: KTexts.accountNumber,
                       ),
                       keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        accountNumber = value;
+                      }
                     ),
                     SizedBox(
                       height: 20,
@@ -78,6 +86,9 @@ class _DepositFormState extends State<DepositForm>{
                         labelText: KTexts.Damount,
                       ),
                       keyboardType: TextInputType.number,
+                      onChanged: (value){
+                        amount = value;
+                    }
                     ),
                     SizedBox(
                       height: 20,
@@ -93,15 +104,22 @@ class _DepositFormState extends State<DepositForm>{
                         width: 70,
                         child: ElevatedButton(
                       onPressed: () async {
+
                           if (!_formKey.currentState!.validate()) {
                             return;
                            }
                           final number = await showDialog<int>(
                           context: context,
-                          builder: (context) => const NumberInputDialog(
-                            title: KTexts.popDeposit, 
+                          builder: (context) =>  NumberInputDialog(
+                            title: KTexts.popDeposit, accountNumber: accountNumber, amount: amount,
+
                           ),
                          );
+                          // deposit(accountNumber, amount, context);
+                          // final screen = await showDialog<int>(
+                          //   context: context,
+                          //   builder: (context) => popUpNoti(title: KTexts.deposits,),
+                          // );
 
                       },
                       child: const Text(KTexts.sendButton),

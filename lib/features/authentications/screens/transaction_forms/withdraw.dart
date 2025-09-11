@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kbankinsystem/common/widgets/appbar/appbar.dart';
 import 'package:kbankinsystem/common/widgets/custom_shapes/containers/primary_header_container.dart';
+import 'package:kbankinsystem/features/authentications/controllers/controllers.dart';
 import 'package:kbankinsystem/features/authentications/screens/landingpage/popUpScreen.dart';
 import 'package:kbankinsystem/utils/helpers/helper_functions.dart';
 import 'package:kbankinsystem/utils/themes/custom_themes/texts.dart';
@@ -19,6 +20,8 @@ class _WithdrawFormState extends State<WithdrawForm>{
   var amountController = TextEditingController();
 
   bool obscureText = true;
+  String accountNumber = "";
+  String amount = "";
 
   @override
 @override
@@ -67,6 +70,9 @@ class _WithdrawFormState extends State<WithdrawForm>{
                       labelText: KTexts.accountNumber,
                       ),
                       keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        accountNumber = value;
+                      }
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
@@ -76,6 +82,9 @@ class _WithdrawFormState extends State<WithdrawForm>{
                       labelText: KTexts.Wamount,
                     ),
                     keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      amount = value;
+                    }
                     ),
                    const SizedBox(height: 20),
                   Row(
@@ -90,12 +99,13 @@ class _WithdrawFormState extends State<WithdrawForm>{
                                 }
                                 final number = await showDialog<int>(
                                 context: context,
-                                builder: (context) => NumberInputDialog(
-                                title: KTexts.popWithdraw,
+                                builder: (context) => popWith(
+                                title: KTexts.popWithdraw, accountNumber: accountNumber, amount: amount,
                                
                                 ),
                                 
                               );
+                                //
                             
                             },
                             

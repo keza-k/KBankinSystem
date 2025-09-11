@@ -46,7 +46,7 @@ class KTexts{
 
   static const String popWithdraw = "You are carrying out a withdraw transaction on your account. Please enter your pin to confirm this transaction";
   static const String popDeposit = "You are carrying out a deposit transaction on your account. Please enter your pin to confirm this transaction";
-  static const String popTransfer = "You are transfering money to 'CLIENT'. Please enter your pin to confirm this transaction";
+  static const String popTransfer = "You are transfering money to another account. Please enter your pin to confirm this transaction";
 
   static const String miniStatements = "Mini Statements";
 
@@ -74,10 +74,14 @@ class KTexts{
 
   static const String accNumber = "Account Number";
   static const String accNumberHolder = "Account Number Holder";
-  static const String transactionType = "Account Number";
+  static const String transactionType = "Transaction Type";
   static const String date = "Date";
 
   static const String popLogin = "Welcome Client, Login successful!!";
+  static const String next = "Next";
+  static const String deposits = "Deposit Successful!, you have deposited   on your account. Your new balance is   ";
+  static const String withdraws = "Withdraw Successful!, you have withdrawn   from your account. Your new balance is   ";
+  static const String transfers = "Transfer Successful!, you have transferred   to  . Your new balance is   ";
 
 
 

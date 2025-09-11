@@ -6,8 +6,11 @@ import 'package:kbankinsystem/utils/helpers/helper_functions.dart';
 import 'package:kbankinsystem/utils/themes/custom_themes/texts.dart';
 
 class HomeScreenn extends StatefulWidget {
-  const HomeScreenn({super.key, required this.mesaage});
-  final String mesaage;
+  const HomeScreenn({super.key, required this.message, required this.transactions, required this.balance});
+
+  final String message;
+  final List transactions;
+  final String balance;
   @override
   State<HomeScreenn> createState() => _HomeScreennState();
 }
@@ -18,7 +21,7 @@ bool obscure = true;
   @override
   Widget build(BuildContext context) {
     final dark = KHelperFunctions.isDarkMode(context);
-
+    print("This is message=====${widget.message}  This is balace=====${widget.balance}  This is transactions=======${widget.transactions}");
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -74,8 +77,8 @@ bool obscure = true;
                     const SizedBox(height: 0,),
                   Text(
               obscure
-                  ? widget.mesaage.replaceAll(RegExp(r"."), "*")
-                  : widget.mesaage,
+                  ? widget.balance.replaceAll(RegExp(r"."), "*")
+                  : widget.balance,
               style: const TextStyle(fontSize: 20),
             ),
 
@@ -98,8 +101,7 @@ bool obscure = true;
                   columnWidths: const {
                     0: FlexColumnWidth(2), // first column takes 2x space
                     1: FlexColumnWidth(2),
-                    2: FlexColumnWidth(2),
-                    3: FlexColumnWidth(2), // second column takes 3x space
+                    2: FlexColumnWidth(2), // second column takes 3x space
                   },
                   children: [
                     TableRow(
@@ -112,10 +114,10 @@ bool obscure = true;
                           padding: EdgeInsets.all(8.0),
                           child: Text(KTexts.accNumber, style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(KTexts.transactionType, style: TextStyle(fontWeight: FontWeight.bold)),
-                        ),
+                        // Padding(
+                        //   padding: EdgeInsets.all(8.0),
+                        //   child: Text(KTexts.transactionType, style: TextStyle(fontWeight: FontWeight.bold)),
+                        // ),
                         Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Text(KTexts.date, style: TextStyle(fontWeight: FontWeight.bold)),
@@ -132,10 +134,10 @@ bool obscure = true;
                           padding: EdgeInsets.all(8.0),
                           child: Text(" "),
                         ),
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(" "),
-                        ),
+                        // Padding(
+                        //   padding: EdgeInsets.all(8.0),
+                        //   child: Text(" "),
+                        // ),
                         Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Text(" "),

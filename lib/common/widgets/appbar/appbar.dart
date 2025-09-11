@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kbankinsystem/features/authentications/screens/landingpage/landingpage.dart';
 import 'package:kbankinsystem/utils/device/device_utility.dart';
 
 class KAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -27,10 +28,10 @@ class KAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return  AppBar(
       automaticallyImplyLeading: false,
-      leading: showBackArrow
-      ?IconButton(onPressed: () {Navigator.pop(context);}, icon: const Icon(Icons.arrow_back))
-      : leadingIcon!=null? IconButton(onPressed: leadingOnPressed, icon:  Icon(leadingIcon)): null,
-      
+      // leading: showBackArrow,
+      // ?IconButton(onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> Landingpage()));}, icon: const Icon(Icons.arrow_back))
+      // : leadingIcon!=null? IconButton(onPressed: leadingOnPressed, icon:  Icon(leadingIcon)): null,
+      //
 
       title: title,
       actions: actions,
